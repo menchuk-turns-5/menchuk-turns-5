@@ -3,13 +3,11 @@
 <html lang="hy">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Արմենի 5-ամյակը</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;500;600&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;500;600;700&family=Noto+Sans+Armenian:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -27,17 +25,49 @@ body {
   position: relative;
   width: 100%;
   max-width: 735px;
+  overflow: hidden;
   font-family: "Noto Serif Armenian", serif;
+  color: #202020;
 }
 
-/* Main invitation background */
 .background {
   display: block;
   width: 100%;
   height: auto;
 }
 
-/* Child's photo inside golden arch */
+/* Header above photo */
+.heading {
+  position: absolute;
+  top: 7.5%;
+  left: 10%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  color: #21651e;
+  font-size: clamp(13px, 2.7vw, 21px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.heading .five {
+  font-size: clamp(45px, 10vw, 85px);
+  color: #cc9327;
+  line-height: 1;
+  position: relative;
+}
+
+.heading .five::before {
+  content: "👑";
+  position: absolute;
+  font-size: 27%;
+  top: -20%;
+  left: 25%;
+}
+
+/* Child's photograph */
 .photo-frame {
   position: absolute;
   left: 29.8%;
@@ -56,94 +86,144 @@ body {
   object-position: center;
 }
 
-/* Shared text styling */
-.text {
+/* Decorative elements beside photograph */
+.photo-decor {
   position: absolute;
+  top: 28%;
+  font-size: clamp(20px, 5vw, 38px);
   text-align: center;
-  color: #28711e;
+  line-height: 1.8;
 }
 
-/* Above the photo */
-.top-text {
-  top: 6.5%;
+.photo-decor.left {
+  left: 17%;
+}
+
+.photo-decor.right {
+  right: 17%;
+}
+
+/* Main title */
+.main-title {
+  position: absolute;
+  top: 51%;
+  left: 8%;
+  width: 84%;
+  color: #21651e;
+  text-align: center;
+  font-size: clamp(17px, 3.8vw, 31px);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Decorative line */
+.ornament {
+  position: absolute;
+  top: 58.5%;
+  left: 25%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c99225;
+  font-size: 16px;
+}
+
+.ornament::before,
+.ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #c99225;
+}
+
+/* Date */
+.date {
+  position: absolute;
+  top: 62%;
   left: 10%;
   width: 80%;
-  color: #252525;
-  font-size: clamp(11px, 2.7vw, 20px);
-  font-weight: 500;
-}
-
-/* Large title below photo */
-.main-title {
-  top: 53.5%;
-  left: 9%;
-  width: 82%;
-  font-size: clamp(19px, 4.3vw, 34px);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-/* Date section */
-.date {
-  top: 65.5%;
-  left: 9%;
-  width: 82%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2%;
-  color: #222;
-  font-size: clamp(12px, 2.7vw, 21px);
+  font-size: clamp(12px, 2.7vw, 22px);
 }
 
-.day-number {
-  color: #c99122;
-  font-size: clamp(30px, 6vw, 49px);
+.date-number {
+  font-size: clamp(35px, 8vw, 65px);
   font-weight: 700;
-  border-left: 1px solid #c99122;
-  border-right: 1px solid #c99122;
-  padding: 0 3%;
+  color: #c99225;
+  border-left: 1px solid #c99225;
+  border-right: 1px solid #c99225;
+  padding: 0 4%;
 }
 
+/* Time */
 .time {
-  top: 72.1%;
+  position: absolute;
+  top: 69.5%;
   left: 20%;
   width: 60%;
-  color: #222;
-  font-size: clamp(13px, 2.6vw, 20px);
+  text-align: center;
+  font-size: clamp(17px, 3.6vw, 29px);
+  font-weight: 700;
   font-style: italic;
 }
 
-/* Restaurant details */
-.venue {
-  top: 78.5%;
-  left: 10%;
-  width: 43%;
-  line-height: 1.55;
+/* Restaurant */
+.restaurant {
+  position: absolute;
+  top: 74%;
+  left: 9%;
+  width: 82%;
+  text-align: center;
 }
 
-.venue-name {
-  font-size: clamp(13px, 2.7vw, 21px);
+.restaurant-name {
+  color: #21651e;
+  font-size: clamp(16px, 3.5vw, 28px);
   font-weight: 700;
 }
 
 .address {
-  color: #222;
-  font-size: clamp(10px, 2vw, 16px);
-  margin-top: 5px;
-}
-
-/* Bottom right message */
-.message {
-  top: 78.5%;
-  right: 8%;
-  width: 37%;
-  font-size: clamp(13px, 2.6vw, 21px);
-  font-weight: 700;
+  margin-top: 7px;
+  font-size: clamp(11px, 2.4vw, 19px);
   line-height: 1.5;
 }
 
+/* Closing message */
+.closing {
+  position: absolute;
+  top: 83%;
+  left: 8%;
+  width: 84%;
+  text-align: center;
+  color: #21651e;
+  font-size: clamp(20px, 4.2vw, 34px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.heart {
+  position: absolute;
+  top: 90%;
+  left: 30%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c99225;
+  font-size: 22px;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  height: 1px;
+  background: #c99225;
+  flex: 1;
+}
 </style>
 </head>
 
@@ -151,57 +231,72 @@ body {
 
 <main class="invitation">
 
-  <!-- Football background -->
+  <!-- Original background -->
   <img
     class="background"
     src="Pastel%20Football%20Birthday%20Frame%20Template.png"
-    alt="Football Birthday Invitation"
+    alt="Birthday invitation background"
   >
 
-  <!-- Child's photo -->
+  <!-- Birthday heading -->
+  <div class="heading">
+    <span>Ես արդեն</span>
+    <span class="five">5</span>
+    <span>տարեկան եմ</span>
+  </div>
+
+  <!-- Child's photograph -->
   <div class="photo-frame">
     <img
       src="Young%20Football%20Champion%20on%20the%20Pitch.png"
-      alt="Birthday Champion"
+      alt="Armen"
     >
   </div>
 
-  <!-- Text above photo -->
-  <div class="text top-text">
-    Ես արդեն 5 տարեկան եմ
+  <!-- Decorations -->
+  <div class="photo-decor left">
+    ⭐<br>⚽<br>✨
   </div>
 
-  <!-- Main invitation title -->
-  <div class="text main-title">
+  <div class="photo-decor right">
+    ⭐<br>⚽<br>✨
+  </div>
+
+  <!-- Main title -->
+  <div class="main-title">
     Արի նշենք Ծնունդս միասին
   </div>
 
+  <div class="ornament">⚽</div>
+
   <!-- Date -->
-  <div class="text date">
+  <div class="date">
     <span>Հինգշաբթի</span>
-    <span class="day-number">29</span>
+    <span class="date-number">29</span>
     <span>Հոկտեմբեր</span>
   </div>
 
   <!-- Time -->
-  <div class="text time">
+  <div class="time">
     17:30
   </div>
 
-  <!-- Restaurant -->
-  <div class="text venue">
-    <div class="venue-name">
-      Little Chef Restaurant
+  <!-- Location -->
+  <div class="restaurant">
+    <div class="restaurant-name">
+      📍 Little Chef Restaurant
     </div>
     <div class="address">
       Հասցեն՝ Առնո Բաբաջանյան 52/2
     </div>
   </div>
 
-  <!-- Invitation closing -->
-  <div class="text message">
+  <!-- Closing -->
+  <div class="closing">
     Անհամբեր Սպասում եմ Քեզ
   </div>
+
+  <div class="heart">♥</div>
 
 </main>
 
