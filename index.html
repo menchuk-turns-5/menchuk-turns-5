@@ -19,21 +19,70 @@
 html, body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
 }
 
 body {
   background: #f5f7ee;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
+  position: relative;
 }
+
+/* OUTSIDE FLOATING FOOTBALLS */
+
+.outer-footballs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: max(0px, calc((100% - 735px) / 2));
+  min-height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.outer-footballs.left {
+  left: 0;
+}
+
+.outer-footballs.right {
+  right: 0;
+}
+
+.football {
+  position: absolute;
+  display: block;
+  font-size: var(--ball-size);
+  line-height: 1;
+  filter: drop-shadow(0 7px 8px rgba(0,0,0,0.16));
+  animation: floatFootball var(--duration)
+    ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+  will-change: transform;
+}
+
+@keyframes floatFootball {
+  0% {
+    transform: translateY(0px) rotate(-12deg);
+  }
+  100% {
+    transform: translateY(-28px) rotate(15deg);
+  }
+}
+
+/* INVITATION */
 
 .invitation {
   position: relative;
   width: 100%;
   max-width: 735px;
+  flex-shrink: 0;
   overflow: hidden;
   font-family: "Noto Serif Armenian", serif;
   color: #222;
+  z-index: 2;
 }
 
 /* ORIGINAL BACKGROUND */
@@ -95,7 +144,7 @@ body {
   object-position: center;
 }
 
-/* FLOATING GOLDEN STARS */
+/* EXISTING FLOATING GOLDEN STARS */
 
 .stars {
   position: absolute;
@@ -119,13 +168,11 @@ body {
   color: #d6a12b;
   font-size: var(--size);
   line-height: 1;
-
   text-shadow:
-    0 0 5px rgba(255, 204, 75, 0.45),
-    0 0 12px rgba(255, 215, 100, 0.25);
+    0 0 5px rgba(255,204,75,0.45),
+    0 0 12px rgba(255,215,100,0.25);
 
-  animation:
-    floatStar var(--duration)
+  animation: floatStar var(--duration)
     ease-in-out infinite alternate;
 
   animation-delay: var(--delay);
@@ -135,7 +182,6 @@ body {
   from {
     transform: translateY(0) rotate(-8deg);
   }
-
   to {
     transform: translateY(-12px) rotate(10deg);
   }
@@ -189,13 +235,13 @@ body {
   justify-content: center;
   align-items: center;
   gap: 2%;
-  font-size: clamp(11px, 2.7vw, 22px);
+  font-size: clamp(11px,2.7vw,22px);
   white-space: nowrap;
 }
 
 .date-number {
   font-family: Georgia, serif;
-  font-size: clamp(34px, 8vw, 65px);
+  font-size: clamp(34px,8vw,65px);
   font-weight: 700;
   color: #c99225;
   border-left: 1px solid #c99225;
@@ -212,7 +258,7 @@ body {
   width: 60%;
   text-align: center;
   font-family: Georgia, serif;
-  font-size: clamp(18px, 3.6vw, 29px);
+  font-size: clamp(18px,3.6vw,29px);
   font-weight: 700;
   font-style: italic;
 }
@@ -229,17 +275,17 @@ body {
 
 .restaurant-name {
   color: #21651e;
-  font-size: clamp(15px, 3.5vw, 28px);
+  font-size: clamp(15px,3.5vw,28px);
   font-weight: 700;
 }
 
 .address {
   margin-top: 7px;
-  font-size: clamp(11px, 2.4vw, 19px);
+  font-size: clamp(11px,2.4vw,19px);
   line-height: 1.5;
 }
 
-/* LARGE CLOSING MESSAGE */
+/* CLOSING MESSAGE */
 
 .closing {
   position: absolute;
@@ -248,7 +294,7 @@ body {
   width: 90%;
   text-align: center;
   color: #21651e;
-  font-size: clamp(19px, 4.2vw, 34px);
+  font-size: clamp(19px,4.2vw,34px);
   font-weight: 700;
   line-height: 1.4;
 }
@@ -275,8 +321,16 @@ body {
   flex: 1;
 }
 
+/* SMALL SCREENS */
+
+@media (max-width: 850px) {
+  .outer-footballs {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .star {
+  .star, .football {
     animation: none;
   }
 }
@@ -285,9 +339,71 @@ body {
 
 <body>
 
-<main class="invitation">
+<!-- FOOTBALLS OUTSIDE THE LEFT SIDE -->
 
-  <!-- ORIGINAL FOOTBALL BACKGROUND -->
+<div class="outer-footballs left" aria-hidden="true">
+
+  <span class="football"
+    style="top:7%;left:18%;--ball-size:85px;--duration:4s;--delay:0s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:23%;left:55%;--ball-size:55px;--duration:5s;--delay:-2s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:40%;left:12%;--ball-size:105px;--duration:4.5s;--delay:-1s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:59%;left:50%;--ball-size:65px;--duration:5.5s;--delay:-3s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:77%;left:15%;--ball-size:90px;--duration:4.2s;--delay:-1.5s">
+    ⚽
+  </span>
+
+</div>
+
+<!-- FOOTBALLS OUTSIDE THE RIGHT SIDE -->
+
+<div class="outer-footballs right" aria-hidden="true">
+
+  <span class="football"
+    style="top:10%;left:35%;--ball-size:100px;--duration:4.5s;--delay:-1s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:28%;left:10%;--ball-size:60px;--duration:5s;--delay:-2.5s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:45%;left:45%;--ball-size:95px;--duration:4s;--delay:0s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:64%;left:15%;--ball-size:55px;--duration:5.5s;--delay:-3s">
+    ⚽
+  </span>
+
+  <span class="football"
+    style="top:81%;left:35%;--ball-size:90px;--duration:4.8s;--delay:-2s">
+    ⚽
+  </span>
+
+</div>
+
+<!-- ORIGINAL INVITATION -->
+
+<main class="invitation">
 
   <img
     class="background"
@@ -295,9 +411,10 @@ body {
     alt="Football Birthday Invitation"
   >
 
-  <!-- CURVED TOP HEADING -->
+  <!-- TOP HEADING -->
 
   <div class="heading">
+
     <svg viewBox="0 0 700 140"
          xmlns="http://www.w3.org/2000/svg">
 
@@ -342,7 +459,7 @@ body {
     </svg>
   </div>
 
-  <!-- CHILD'S PHOTO -->
+  <!-- BOY'S PHOTO -->
 
   <div class="photo-frame">
     <img
@@ -351,7 +468,7 @@ body {
     >
   </div>
 
-  <!-- FLOATING GOLDEN STARS LEFT -->
+  <!-- ORIGINAL LEFT GOLDEN STARS -->
 
   <div class="stars stars-left" aria-hidden="true">
 
@@ -377,7 +494,7 @@ body {
 
   </div>
 
-  <!-- FLOATING GOLDEN STARS RIGHT -->
+  <!-- ORIGINAL RIGHT GOLDEN STARS -->
 
   <div class="stars stars-right" aria-hidden="true">
 
@@ -452,7 +569,7 @@ body {
     17:30
   </div>
 
-  <!-- RESTAURANT AND ADDRESS -->
+  <!-- RESTAURANT -->
 
   <div class="restaurant">
 
