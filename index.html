@@ -19,25 +19,32 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
   min-height: 100%;
 }
 
 body {
   background: #f5f7ee;
-  display: flex;
-  justify-content: center;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* OUTSIDE FLOATING FOOTBALLS */
+/* PAGE */
+
+.page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* DESKTOP FOOTBALLS */
 
 .outer-footballs {
   position: absolute;
   top: 0;
   bottom: 0;
   width: max(0px, calc((100% - 735px) / 2));
-  min-height: 100%;
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
@@ -56,19 +63,18 @@ body {
   display: block;
   font-size: var(--ball-size);
   line-height: 1;
-  filter: drop-shadow(0 7px 8px rgba(0,0,0,0.16));
+  filter: drop-shadow(0 5px 6px rgba(0,0,0,0.15));
   animation: floatFootball var(--duration)
     ease-in-out infinite alternate;
   animation-delay: var(--delay);
-  will-change: transform;
 }
 
 @keyframes floatFootball {
   from {
-    transform: translateY(0) rotate(-12deg);
+    transform: translateY(0) rotate(-10deg);
   }
   to {
-    transform: translateY(-28px) rotate(15deg);
+    transform: translateY(-20px) rotate(12deg);
   }
 }
 
@@ -91,7 +97,37 @@ body {
   height: auto;
 }
 
-/* CURVED TOP HEADING */
+/* MOBILE EDGE FOOTBALLS */
+
+.mobile-footballs {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 6;
+}
+
+.mobile-ball {
+  position: absolute;
+  font-size: clamp(18px, 5.5vw, 29px);
+  line-height: 1;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.12));
+  animation: mobileFloat var(--duration)
+    ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+
+@keyframes mobileFloat {
+  from {
+    transform: translateY(0) rotate(-12deg);
+  }
+  to {
+    transform: translateY(-12px) rotate(12deg);
+  }
+}
+
+/* TOP HEADING */
 
 .heading {
   position: absolute;
@@ -121,7 +157,7 @@ body {
   fill: #cc9327;
 }
 
-/* CHILD'S PHOTO */
+/* PHOTO */
 
 .photo-frame {
   position: absolute;
@@ -142,7 +178,7 @@ body {
   object-position: center;
 }
 
-/* EXISTING FLOATING GOLDEN STARS */
+/* GOLDEN STARS */
 
 .stars {
   position: absolute;
@@ -168,7 +204,7 @@ body {
   line-height: 1;
   text-shadow:
     0 0 5px rgba(255,204,75,0.45),
-    0 0 12px rgba(255,215,100,0.25));
+    0 0 12px rgba(255,215,100,0.25);
   animation: floatStar var(--duration)
     ease-in-out infinite alternate;
   animation-delay: var(--delay);
@@ -183,7 +219,7 @@ body {
   }
 }
 
-/* CURVED MAIN TITLE */
+/* MAIN TITLE */
 
 .main-title {
   position: absolute;
@@ -198,7 +234,7 @@ body {
   overflow: visible;
 }
 
-/* GOLD ORNAMENT */
+/* ORNAMENT */
 
 .ornament {
   position: absolute;
@@ -281,7 +317,7 @@ body {
   line-height: 1.5;
 }
 
-/* CLOSING MESSAGE */
+/* CLOSING */
 
 .closing {
   position: absolute;
@@ -295,7 +331,7 @@ body {
   line-height: 1.4;
 }
 
-/* GOLD HEART */
+/* HEART */
 
 .heart {
   position: absolute;
@@ -325,7 +361,7 @@ body {
   right: 24px;
   width: 58px;
   height: 58px;
-  border: 2px solid #ffffff;
+  border: 2px solid white;
   border-radius: 50%;
   background: #c99225;
   color: white;
@@ -336,39 +372,70 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s;
 }
-
-.music-button:hover {
-  transform: scale(1.08);
-}
-
-.music-button:focus-visible {
-  outline: 3px solid #21651e;
-  outline-offset: 3px;
-}
-
-/* HIDDEN YOUTUBE PLAYER */
 
 #youtube-player {
   position: fixed;
-  width: 1px;
-  height: 1px;
+  width: 200px;
+  height: 200px;
   left: -9999px;
   top: 0;
   pointer-events: none;
 }
 
-/* SMALL SCREENS */
+/* MOBILE: FULL-WIDTH INVITATION */
 
-@media (max-width: 850px) {
+@media (max-width: 735px) {
+
+  .page {
+    padding: 0;
+    display: block;
+  }
+
+  .invitation {
+    width: 100%;
+    max-width: none;
+  }
+
   .outer-footballs {
     display: none;
+  }
+
+  .mobile-footballs {
+    display: block;
+  }
+
+  .date {
+    font-size: clamp(10px, 3vw, 18px);
+  }
+
+  .date-number {
+    font-size: clamp(32px, 9vw, 60px);
+  }
+
+  .restaurant-name {
+    font-size: clamp(12px, 3.5vw, 24px);
+  }
+
+  .address {
+    font-size: clamp(10px, 2.5vw, 17px);
+  }
+
+  .closing {
+    font-size: clamp(15px, 4vw, 29px);
+  }
+
+  .music-button {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .star, .football {
+  .star, .football, .mobile-ball {
     animation: none;
   }
 }
@@ -377,100 +444,53 @@ body {
 
 <body>
 
-<!-- FOOTBALLS OUTSIDE LEFT -->
+<div class="page">
+
+<!-- DESKTOP LEFT FOOTBALLS -->
 
 <div class="outer-footballs left" aria-hidden="true">
-
-  <span class="football"
-    style="top:7%;left:18%;--ball-size:85px;--duration:4s;--delay:0s">⚽</span>
-
-  <span class="football"
-    style="top:23%;left:55%;--ball-size:55px;--duration:5s;--delay:-2s">⚽</span>
-
-  <span class="football"
-    style="top:40%;left:12%;--ball-size:105px;--duration:4.5s;--delay:-1s">⚽</span>
-
-  <span class="football"
-    style="top:59%;left:50%;--ball-size:65px;--duration:5.5s;--delay:-3s">⚽</span>
-
-  <span class="football"
-    style="top:77%;left:15%;--ball-size:90px;--duration:4.2s;--delay:-1.5s">⚽</span>
-
+  <span class="football" style="top:8%;left:12%;--ball-size:75px;--duration:4s;--delay:0s">⚽</span>
+  <span class="football" style="top:25%;left:30%;--ball-size:55px;--duration:5s;--delay:-2s">⚽</span>
+  <span class="football" style="top:44%;left:8%;--ball-size:85px;--duration:4.5s;--delay:-1s">⚽</span>
+  <span class="football" style="top:63%;left:25%;--ball-size:60px;--duration:5s;--delay:-3s">⚽</span>
+  <span class="football" style="top:82%;left:10%;--ball-size:75px;--duration:4.2s;--delay:-1s">⚽</span>
 </div>
 
-<!-- FOOTBALLS OUTSIDE RIGHT -->
+<!-- DESKTOP RIGHT FOOTBALLS -->
 
 <div class="outer-footballs right" aria-hidden="true">
-
-  <span class="football"
-    style="top:10%;left:35%;--ball-size:100px;--duration:4.5s;--delay:-1s">⚽</span>
-
-  <span class="football"
-    style="top:28%;left:10%;--ball-size:60px;--duration:5s;--delay:-2.5s">⚽</span>
-
-  <span class="football"
-    style="top:45%;left:45%;--ball-size:95px;--duration:4s;--delay:0s">⚽</span>
-
-  <span class="football"
-    style="top:64%;left:15%;--ball-size:55px;--duration:5.5s;--delay:-3s">⚽</span>
-
-  <span class="football"
-    style="top:81%;left:35%;--ball-size:90px;--duration:4.8s;--delay:-2s">⚽</span>
-
+  <span class="football" style="top:12%;left:15%;--ball-size:85px;--duration:4.5s;--delay:-1s">⚽</span>
+  <span class="football" style="top:30%;left:35%;--ball-size:55px;--duration:5s;--delay:-2s">⚽</span>
+  <span class="football" style="top:49%;left:10%;--ball-size:80px;--duration:4s;--delay:0s">⚽</span>
+  <span class="football" style="top:67%;left:30%;--ball-size:60px;--duration:5.5s;--delay:-3s">⚽</span>
+  <span class="football" style="top:85%;left:12%;--ball-size:75px;--duration:4.8s;--delay:-2s">⚽</span>
 </div>
-
-<!-- ORIGINAL INVITATION -->
 
 <main class="invitation">
 
-  <img
-    class="background"
+  <img class="background"
     src="Pastel%20Football%20Birthday%20Frame%20Template.png"
-    alt="Football Birthday Invitation"
-  >
+    alt="Football Birthday Invitation">
 
   <!-- TOP HEADING -->
 
   <div class="heading">
-
-    <svg viewBox="0 0 700 140"
-         xmlns="http://www.w3.org/2000/svg">
-
+    <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <path id="leftCurve"
-              d="M 30,95 Q 155,45 275,72" />
-        <path id="rightCurve"
-              d="M 425,72 Q 545,45 670,95" />
+        <path id="leftCurve" d="M 30,95 Q 155,45 275,72"/>
+        <path id="rightCurve" d="M 425,72 Q 545,45 670,95"/>
       </defs>
 
       <text class="curved-text">
-        <textPath href="#leftCurve"
-                  startOffset="50%"
-                  text-anchor="middle">
-          Ես արդեն
-        </textPath>
+        <textPath href="#leftCurve" startOffset="50%" text-anchor="middle">Ես արդեն</textPath>
       </text>
 
-      <text x="350" y="105"
-            class="gold-five"
-            text-anchor="middle">
-        5
-      </text>
-
-      <text x="350" y="18"
-            font-size="35"
-            text-anchor="middle">
-        👑
-      </text>
+      <text x="350" y="105" class="gold-five" text-anchor="middle">5</text>
+      <text x="350" y="18" font-size="35" text-anchor="middle">👑</text>
 
       <text class="curved-text">
-        <textPath href="#rightCurve"
-                  startOffset="50%"
-                  text-anchor="middle">
-          տարեկան եմ
-        </textPath>
+        <textPath href="#rightCurve" startOffset="50%" text-anchor="middle">տարեկան եմ</textPath>
       </text>
-
     </svg>
   </div>
 
@@ -479,76 +499,45 @@ body {
   <div class="photo-frame">
     <img
       src="Young%20Football%20Champion%20on%20the%20Pitch.png"
-      alt="Armen"
-    >
+      alt="Armen">
   </div>
 
-  <!-- LEFT GOLDEN STARS -->
+  <!-- GOLDEN STARS LEFT -->
 
   <div class="stars stars-left" aria-hidden="true">
-
-    <span class="star"
-      style="top:5%;left:20%;--size:28px;--duration:3s;--delay:0s">★</span>
-
-    <span class="star"
-      style="top:30%;left:65%;--size:15px;--duration:4s;--delay:-1s">✦</span>
-
-    <span class="star"
-      style="top:55%;left:10%;--size:22px;--duration:3.5s;--delay:-2s">★</span>
-
-    <span class="star"
-      style="top:82%;left:55%;--size:12px;--duration:4.5s;--delay:-1.5s">✧</span>
-
+    <span class="star" style="top:5%;left:20%;--size:28px;--duration:3s;--delay:0s">★</span>
+    <span class="star" style="top:30%;left:65%;--size:15px;--duration:4s;--delay:-1s">✦</span>
+    <span class="star" style="top:55%;left:10%;--size:22px;--duration:3.5s;--delay:-2s">★</span>
+    <span class="star" style="top:82%;left:55%;--size:12px;--duration:4.5s;--delay:-1.5s">✧</span>
   </div>
 
-  <!-- RIGHT GOLDEN STARS -->
+  <!-- GOLDEN STARS RIGHT -->
 
   <div class="stars stars-right" aria-hidden="true">
-
-    <span class="star"
-      style="top:12%;left:50%;--size:23px;--duration:3.8s;--delay:-1s">★</span>
-
-    <span class="star"
-      style="top:38%;left:10%;--size:14px;--duration:4s;--delay:-2s">✦</span>
-
-    <span class="star"
-      style="top:63%;left:65%;--size:28px;--duration:3.2s;--delay:-0.5s">★</span>
-
-    <span class="star"
-      style="top:88%;left:25%;--size:13px;--duration:4.5s;--delay:-1.5s">✧</span>
-
+    <span class="star" style="top:12%;left:50%;--size:23px;--duration:3.8s;--delay:-1s">★</span>
+    <span class="star" style="top:38%;left:10%;--size:14px;--duration:4s;--delay:-2s">✦</span>
+    <span class="star" style="top:63%;left:65%;--size:28px;--duration:3.2s;--delay:-0.5s">★</span>
+    <span class="star" style="top:88%;left:25%;--size:13px;--duration:4.5s;--delay:-1.5s">✧</span>
   </div>
 
-  <!-- CURVED MAIN TITLE -->
+  <!-- MAIN TITLE -->
 
   <div class="main-title">
-
-    <svg viewBox="0 0 700 110"
-         xmlns="http://www.w3.org/2000/svg">
-
+    <svg viewBox="0 0 700 110" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <path id="titleCurve"
-              d="M 35,80 Q 350,10 665,80" />
+        <path id="titleCurve" d="M 35,80 Q 350,10 665,80"/>
       </defs>
-
-      <text
-        fill="#21651e"
+      <text fill="#21651e"
         font-family="Noto Serif Armenian, serif"
         font-size="39"
         font-weight="700"
         font-style="italic">
-
-        <textPath href="#titleCurve"
-                  startOffset="50%"
-                  text-anchor="middle">
+        <textPath href="#titleCurve" startOffset="50%" text-anchor="middle">
           Արի նշենք Ծնունդս միասին
         </textPath>
-
       </text>
     </svg>
   </div>
-
-  <!-- GOLD ORNAMENT -->
 
   <div class="ornament">⚽</div>
 
@@ -560,37 +549,46 @@ body {
     <span>Հոկտեմբեր</span>
   </div>
 
-  <!-- TIME -->
-
   <div class="time">17:30</div>
 
   <!-- RESTAURANT -->
 
   <div class="restaurant">
-
-    <div class="restaurant-name">
-      📍 Little Chef Restaurant
-    </div>
-
-    <div class="address">
-      Հասցեն՝ Առնո Բաբաջանյան 52/2
-    </div>
-
+    <div class="restaurant-name">📍 Little Chef Restaurant</div>
+    <div class="address">Հասցեն՝ Առնո Բաբաջանյան 52/2</div>
   </div>
 
-  <!-- CLOSING MESSAGE -->
+  <!-- CLOSING -->
 
-  <div class="closing">
-    Անհամբեր Սպասում եմ Քեզ
-  </div>
-
-  <!-- GOLD HEART -->
+  <div class="closing">Անհամբեր Սպասում եմ Քեզ</div>
 
   <div class="heart">♥</div>
 
+  <!-- MOBILE FLOATING FOOTBALLS ALONG EDGES -->
+
+  <div class="mobile-footballs" aria-hidden="true">
+
+    <!-- LEFT EDGE -->
+    <span class="mobile-ball" style="top:9%;left:0%;--duration:3.5s;--delay:0s">⚽</span>
+    <span class="mobile-ball" style="top:27%;left:1%;--duration:4s;--delay:-1s">⚽</span>
+    <span class="mobile-ball" style="top:46%;left:0%;--duration:3.8s;--delay:-2s">⚽</span>
+    <span class="mobile-ball" style="top:67%;left:1%;--duration:4.5s;--delay:-1.5s">⚽</span>
+    <span class="mobile-ball" style="top:87%;left:0%;--duration:3.7s;--delay:-2.5s">⚽</span>
+
+    <!-- RIGHT EDGE -->
+    <span class="mobile-ball" style="top:15%;right:0%;--duration:4s;--delay:-1s">⚽</span>
+    <span class="mobile-ball" style="top:34%;right:1%;--duration:3.5s;--delay:-2s">⚽</span>
+    <span class="mobile-ball" style="top:53%;right:0%;--duration:4.2s;--delay:0s">⚽</span>
+    <span class="mobile-ball" style="top:74%;right:1%;--duration:3.8s;--delay:-1.5s">⚽</span>
+    <span class="mobile-ball" style="top:92%;right:0%;--duration:4.5s;--delay:-2.5s">⚽</span>
+
+  </div>
+
 </main>
 
-<!-- YOUTUBE MUSIC PLAYER -->
+</div>
+
+<!-- YOUTUBE MUSIC -->
 
 <div id="youtube-player" aria-hidden="true"></div>
 
@@ -599,89 +597,71 @@ body {
   id="musicButton"
   type="button"
   aria-label="Play birthday music"
-  aria-pressed="false"
-  title="Play birthday music">
-  ▶
-</button>
+  aria-pressed="false">▶</button>
 
 <script>
-  let player = null;
-  let musicPlaying = false;
+let player = null;
+let musicPlaying = false;
 
-  const musicButton = document.getElementById("musicButton");
+const musicButton = document.getElementById("musicButton");
 
-  function updateMusicButton(playing) {
-    musicPlaying = playing;
-    musicButton.textContent = playing ? "♫" : "▶";
-    musicButton.setAttribute(
-      "aria-label",
-      playing ? "Pause birthday music" : "Play birthday music"
-    );
-    musicButton.setAttribute(
-      "aria-pressed",
-      String(playing)
-    );
-    musicButton.title = playing
-      ? "Pause birthday music"
-      : "Play birthday music";
-  }
+function updateMusicButton(playing) {
+  musicPlaying = playing;
+  musicButton.textContent = playing ? "♫" : "▶";
+  musicButton.setAttribute(
+    "aria-label",
+    playing ? "Pause birthday music" : "Play birthday music"
+  );
+  musicButton.setAttribute("aria-pressed", String(playing));
+}
 
-  // Load the official YouTube iframe API.
-  const youtubeScript = document.createElement("script");
-  youtubeScript.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(youtubeScript);
+const youtubeScript = document.createElement("script");
+youtubeScript.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(youtubeScript);
 
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player("youtube-player", {
-      width: "200",
-      height: "200",
-      videoId: "DnmQv7T9QGs",
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        playsinline: 1,
-        rel: 0,
-        origin: window.location.origin
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("youtube-player", {
+    width: "200",
+    height: "200",
+    videoId: "DnmQv7T9QGs",
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      playsinline: 1,
+      rel: 0,
+      origin: window.location.origin
+    },
+    events: {
+      onReady: function(event) {
+        event.target.playVideo();
       },
-      events: {
-        onReady: function(event) {
-          // Attempt playback as soon as the page opens.
-          event.target.playVideo();
-        },
-        onStateChange: function(event) {
-          if (event.data === YT.PlayerState.PLAYING) {
-            updateMusicButton(true);
-          } else if (
-            event.data === YT.PlayerState.PAUSED ||
-            event.data === YT.PlayerState.ENDED
-          ) {
-            updateMusicButton(false);
-          }
-        },
-        onAutoplayBlocked: function() {
+      onStateChange: function(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+          updateMusicButton(true);
+        } else if (
+          event.data === YT.PlayerState.PAUSED ||
+          event.data === YT.PlayerState.ENDED
+        ) {
           updateMusicButton(false);
-        },
-        onError: function() {
-          updateMusicButton(false);
-          musicButton.title = "YouTube playback unavailable";
         }
+      },
+      onAutoplayBlocked: function() {
+        updateMusicButton(false);
       }
-    });
-  }
-
-  // Play or pause after a visitor taps the button.
-  musicButton.addEventListener("click", function() {
-    if (!player || typeof player.playVideo !== "function") {
-      return;
-    }
-
-    if (musicPlaying) {
-      player.pauseVideo();
-      updateMusicButton(false);
-    } else {
-      player.playVideo();
     }
   });
+}
+
+musicButton.addEventListener("click", function() {
+  if (!player || typeof player.playVideo !== "function") return;
+
+  if (musicPlaying) {
+    player.pauseVideo();
+    updateMusicButton(false);
+  } else {
+    player.playVideo();
+  }
+});
 </script>
 
 </body>
