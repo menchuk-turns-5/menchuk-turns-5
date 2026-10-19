@@ -15,22 +15,42 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
-      background: #f6f8f0;
+      background: #f5f7ee;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
     }
 
     .invitation {
+      position: relative;
       width: 100%;
       max-width: 735px;
     }
 
-    .invitation img {
+    .background {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    /* Photo inside the golden arch */
+    .photo-frame {
+      position: absolute;
+
+      left: 29.8%;
+      top: 15.9%;
+      width: 40.4%;
+      height: 32.5%;
+
+      overflow: hidden;
+      border-radius: 50% 50% 0 0;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
   </style>
 </head>
@@ -38,10 +58,22 @@
 <body>
 
   <main class="invitation">
+
+    <!-- Original football invitation -->
     <img
+      class="background"
       src="Pastel%20Football%20Birthday%20Frame%20Template.png"
-      alt="Armen's Football Birthday Invitation"
+      alt="Football Birthday Invitation"
     >
+
+    <!-- Champion photo inside the frame -->
+    <div class="photo-frame">
+      <img
+        src="Young%20Football%20Champion%20on%20the%20Pitch.png"
+        alt="Young Football Champion"
+      >
+    </div>
+
   </main>
 
 </body>
