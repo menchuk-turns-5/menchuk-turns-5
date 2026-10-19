@@ -64,10 +64,10 @@ body {
 }
 
 @keyframes floatFootball {
-  0% {
-    transform: translateY(0px) rotate(-12deg);
+  from {
+    transform: translateY(0) rotate(-12deg);
   }
-  100% {
+  to {
     transform: translateY(-28px) rotate(15deg);
   }
 }
@@ -84,8 +84,6 @@ body {
   color: #222;
   z-index: 2;
 }
-
-/* ORIGINAL BACKGROUND */
 
 .background {
   display: block;
@@ -170,11 +168,9 @@ body {
   line-height: 1;
   text-shadow:
     0 0 5px rgba(255,204,75,0.45),
-    0 0 12px rgba(255,215,100,0.25);
-
+    0 0 12px rgba(255,215,100,0.25));
   animation: floatStar var(--duration)
     ease-in-out infinite alternate;
-
   animation-delay: var(--delay);
 }
 
@@ -321,6 +317,48 @@ body {
   flex: 1;
 }
 
+/* MUSIC BUTTON */
+
+.music-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: #c99225;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.music-button:hover {
+  transform: scale(1.08);
+}
+
+.music-button:focus-visible {
+  outline: 3px solid #21651e;
+  outline-offset: 3px;
+}
+
+/* HIDDEN YOUTUBE PLAYER */
+
+#youtube-player {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  left: -9999px;
+  top: 0;
+  pointer-events: none;
+}
+
 /* SMALL SCREENS */
 
 @media (max-width: 850px) {
@@ -339,65 +377,45 @@ body {
 
 <body>
 
-<!-- FOOTBALLS OUTSIDE THE LEFT SIDE -->
+<!-- FOOTBALLS OUTSIDE LEFT -->
 
 <div class="outer-footballs left" aria-hidden="true">
 
   <span class="football"
-    style="top:7%;left:18%;--ball-size:85px;--duration:4s;--delay:0s">
-    ⚽
-  </span>
+    style="top:7%;left:18%;--ball-size:85px;--duration:4s;--delay:0s">⚽</span>
 
   <span class="football"
-    style="top:23%;left:55%;--ball-size:55px;--duration:5s;--delay:-2s">
-    ⚽
-  </span>
+    style="top:23%;left:55%;--ball-size:55px;--duration:5s;--delay:-2s">⚽</span>
 
   <span class="football"
-    style="top:40%;left:12%;--ball-size:105px;--duration:4.5s;--delay:-1s">
-    ⚽
-  </span>
+    style="top:40%;left:12%;--ball-size:105px;--duration:4.5s;--delay:-1s">⚽</span>
 
   <span class="football"
-    style="top:59%;left:50%;--ball-size:65px;--duration:5.5s;--delay:-3s">
-    ⚽
-  </span>
+    style="top:59%;left:50%;--ball-size:65px;--duration:5.5s;--delay:-3s">⚽</span>
 
   <span class="football"
-    style="top:77%;left:15%;--ball-size:90px;--duration:4.2s;--delay:-1.5s">
-    ⚽
-  </span>
+    style="top:77%;left:15%;--ball-size:90px;--duration:4.2s;--delay:-1.5s">⚽</span>
 
 </div>
 
-<!-- FOOTBALLS OUTSIDE THE RIGHT SIDE -->
+<!-- FOOTBALLS OUTSIDE RIGHT -->
 
 <div class="outer-footballs right" aria-hidden="true">
 
   <span class="football"
-    style="top:10%;left:35%;--ball-size:100px;--duration:4.5s;--delay:-1s">
-    ⚽
-  </span>
+    style="top:10%;left:35%;--ball-size:100px;--duration:4.5s;--delay:-1s">⚽</span>
 
   <span class="football"
-    style="top:28%;left:10%;--ball-size:60px;--duration:5s;--delay:-2.5s">
-    ⚽
-  </span>
+    style="top:28%;left:10%;--ball-size:60px;--duration:5s;--delay:-2.5s">⚽</span>
 
   <span class="football"
-    style="top:45%;left:45%;--ball-size:95px;--duration:4s;--delay:0s">
-    ⚽
-  </span>
+    style="top:45%;left:45%;--ball-size:95px;--duration:4s;--delay:0s">⚽</span>
 
   <span class="football"
-    style="top:64%;left:15%;--ball-size:55px;--duration:5.5s;--delay:-3s">
-    ⚽
-  </span>
+    style="top:64%;left:15%;--ball-size:55px;--duration:5.5s;--delay:-3s">⚽</span>
 
   <span class="football"
-    style="top:81%;left:35%;--ball-size:90px;--duration:4.8s;--delay:-2s">
-    ⚽
-  </span>
+    style="top:81%;left:35%;--ball-size:90px;--duration:4.8s;--delay:-2s">⚽</span>
 
 </div>
 
@@ -421,7 +439,6 @@ body {
       <defs>
         <path id="leftCurve"
               d="M 30,95 Q 155,45 275,72" />
-
         <path id="rightCurve"
               d="M 425,72 Q 545,45 670,95" />
       </defs>
@@ -434,15 +451,13 @@ body {
         </textPath>
       </text>
 
-      <text x="350"
-            y="105"
+      <text x="350" y="105"
             class="gold-five"
             text-anchor="middle">
         5
       </text>
 
-      <text x="350"
-            y="18"
+      <text x="350" y="18"
             font-size="35"
             text-anchor="middle">
         👑
@@ -468,55 +483,39 @@ body {
     >
   </div>
 
-  <!-- ORIGINAL LEFT GOLDEN STARS -->
+  <!-- LEFT GOLDEN STARS -->
 
   <div class="stars stars-left" aria-hidden="true">
 
     <span class="star"
-      style="top:5%;left:20%;--size:28px;--duration:3s;--delay:0s">
-      ★
-    </span>
+      style="top:5%;left:20%;--size:28px;--duration:3s;--delay:0s">★</span>
 
     <span class="star"
-      style="top:30%;left:65%;--size:15px;--duration:4s;--delay:-1s">
-      ✦
-    </span>
+      style="top:30%;left:65%;--size:15px;--duration:4s;--delay:-1s">✦</span>
 
     <span class="star"
-      style="top:55%;left:10%;--size:22px;--duration:3.5s;--delay:-2s">
-      ★
-    </span>
+      style="top:55%;left:10%;--size:22px;--duration:3.5s;--delay:-2s">★</span>
 
     <span class="star"
-      style="top:82%;left:55%;--size:12px;--duration:4.5s;--delay:-1.5s">
-      ✧
-    </span>
+      style="top:82%;left:55%;--size:12px;--duration:4.5s;--delay:-1.5s">✧</span>
 
   </div>
 
-  <!-- ORIGINAL RIGHT GOLDEN STARS -->
+  <!-- RIGHT GOLDEN STARS -->
 
   <div class="stars stars-right" aria-hidden="true">
 
     <span class="star"
-      style="top:12%;left:50%;--size:23px;--duration:3.8s;--delay:-1s">
-      ★
-    </span>
+      style="top:12%;left:50%;--size:23px;--duration:3.8s;--delay:-1s">★</span>
 
     <span class="star"
-      style="top:38%;left:10%;--size:14px;--duration:4s;--delay:-2s">
-      ✦
-    </span>
+      style="top:38%;left:10%;--size:14px;--duration:4s;--delay:-2s">✦</span>
 
     <span class="star"
-      style="top:63%;left:65%;--size:28px;--duration:3.2s;--delay:-0.5s">
-      ★
-    </span>
+      style="top:63%;left:65%;--size:28px;--duration:3.2s;--delay:-0.5s">★</span>
 
     <span class="star"
-      style="top:88%;left:25%;--size:13px;--duration:4.5s;--delay:-1.5s">
-      ✧
-    </span>
+      style="top:88%;left:25%;--size:13px;--duration:4.5s;--delay:-1.5s">✧</span>
 
   </div>
 
@@ -546,9 +545,7 @@ body {
         </textPath>
 
       </text>
-
     </svg>
-
   </div>
 
   <!-- GOLD ORNAMENT -->
@@ -565,9 +562,7 @@ body {
 
   <!-- TIME -->
 
-  <div class="time">
-    17:30
-  </div>
+  <div class="time">17:30</div>
 
   <!-- RESTAURANT -->
 
@@ -594,6 +589,100 @@ body {
   <div class="heart">♥</div>
 
 </main>
+
+<!-- YOUTUBE MUSIC PLAYER -->
+
+<div id="youtube-player" aria-hidden="true"></div>
+
+<button
+  class="music-button"
+  id="musicButton"
+  type="button"
+  aria-label="Play birthday music"
+  aria-pressed="false"
+  title="Play birthday music">
+  ▶
+</button>
+
+<script>
+  let player = null;
+  let musicPlaying = false;
+
+  const musicButton = document.getElementById("musicButton");
+
+  function updateMusicButton(playing) {
+    musicPlaying = playing;
+    musicButton.textContent = playing ? "♫" : "▶";
+    musicButton.setAttribute(
+      "aria-label",
+      playing ? "Pause birthday music" : "Play birthday music"
+    );
+    musicButton.setAttribute(
+      "aria-pressed",
+      String(playing)
+    );
+    musicButton.title = playing
+      ? "Pause birthday music"
+      : "Play birthday music";
+  }
+
+  // Load the official YouTube iframe API.
+  const youtubeScript = document.createElement("script");
+  youtubeScript.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(youtubeScript);
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("youtube-player", {
+      width: "200",
+      height: "200",
+      videoId: "DnmQv7T9QGs",
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        playsinline: 1,
+        rel: 0,
+        origin: window.location.origin
+      },
+      events: {
+        onReady: function(event) {
+          // Attempt playback as soon as the page opens.
+          event.target.playVideo();
+        },
+        onStateChange: function(event) {
+          if (event.data === YT.PlayerState.PLAYING) {
+            updateMusicButton(true);
+          } else if (
+            event.data === YT.PlayerState.PAUSED ||
+            event.data === YT.PlayerState.ENDED
+          ) {
+            updateMusicButton(false);
+          }
+        },
+        onAutoplayBlocked: function() {
+          updateMusicButton(false);
+        },
+        onError: function() {
+          updateMusicButton(false);
+          musicButton.title = "YouTube playback unavailable";
+        }
+      }
+    });
+  }
+
+  // Play or pause after a visitor taps the button.
+  musicButton.addEventListener("click", function() {
+    if (!player || typeof player.playVideo !== "function") {
+      return;
+    }
+
+    if (musicPlaying) {
+      player.pauseVideo();
+      updateMusicButton(false);
+    } else {
+      player.playVideo();
+    }
+  });
+</script>
 
 </body>
 </html>
