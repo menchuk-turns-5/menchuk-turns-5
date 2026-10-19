@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="hy">
 <head>
@@ -7,12 +6,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>Birthday Invitation</title>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <title>Armen's Birthday Invitation</title>
 
   <style>
     * {
@@ -21,52 +15,22 @@
 
     body {
       margin: 0;
-      padding: 20px 10px;
-      background: #f1f4eb;
-      font-family: 'Noto Serif Armenian', serif;
+      min-height: 100vh;
+      background: #f6f8f0;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
     }
 
     .invitation {
-      position: relative;
       width: 100%;
       max-width: 735px;
-      aspect-ratio: 1024 / 1536;
-
-      background-image: url("Paste%20Football%20Birthday%20Template.png");
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
     }
 
-    .invitation-text {
-      position: absolute;
-      top: 55%;
-      left: 12%;
-      width: 76%;
-      text-align: center;
-      color: #286b20;
-    }
-
-    .invitation-text h1 {
-      font-size: clamp(18px, 4vw, 36px);
-      margin-bottom: 15px;
-    }
-
-    .invitation-text p {
-      font-size: clamp(12px, 2.5vw, 21px);
-      line-height: 1.7;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 0;
-      }
-
-      .invitation-text {
-        top: 55%;
-      }
+    .invitation img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -74,11 +38,10 @@
 <body>
 
   <main class="invitation">
-
-    <div class="invitation-text">
-      <!-- Armenian invitation text goes here later -->
-    </div>
-
+    <img
+      src="Pastel%20Football%20Birthday%20Frame%20Template.png"
+      alt="Armen's Football Birthday Invitation"
+    >
   </main>
 
 </body>
